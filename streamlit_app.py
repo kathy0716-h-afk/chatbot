@@ -15,10 +15,10 @@ else:
     # ユーザーがモデルを選択できるようにする
     model_name = st.selectbox(
         "使用する Gemini モデルを選択",
-    (
-        "gemini-2.5-flash",
-        "gemini-2.5-pro"
-    )
+        (
+            "gemini-2.5-flash", 
+            "gemini-2.5-pro"
+        )
     )
     st.write(f"現在のモデル: **{model_name}**")
 
@@ -50,7 +50,7 @@ else:
             )
 
         # APIキーを含まないクリーンなURLを定義
-        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
+        api_url = f"https://generativelanguage.googleapis.com/v1/models/{model_name}:generateContent"
 
         # ヘッダーに Content-Type と APIキーを含める
         headers = {
@@ -97,11 +97,9 @@ else:
             st.session_state.messages.append({"role": "assistant", "content": gemini_reply})
 
         except requests.exceptions.RequestException as e:
-            st.error(f"APIリクエストエラー: {e}")
-            if 'response' in locals():
-                st.write("ステータスコード:", response.status_code)
-                st.write("レスポンス:")
-                st.json(response.json())
+            error_message = f"APIリクエストエラーが発生しました: {e}"
+            st.error(error_message)
+            st.session_state.messages.append({"role": "assistant", "content": error_message})
         except Exception as e:
             error_message = f"予期せぬエラーが発生しました: {e}"
             st.error(error_message)
