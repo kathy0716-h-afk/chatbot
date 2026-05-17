@@ -15,10 +15,10 @@ else:
     # ユーザーがモデルを選択できるようにする
     model_name = st.selectbox(
         "使用する Gemini モデルを選択",
-        (
-            "gemini-2.5-flash", 
-            "gemini-2.5-pro"
-        )
+    (
+    "gemini-1.5-flash",
+    "gemini-1.5-pro"
+    )
     )
     st.write(f"現在のモデル: **{model_name}**")
 
