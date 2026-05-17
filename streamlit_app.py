@@ -50,7 +50,7 @@ else:
             )
 
         # APIキーを含まないクリーンなURLを定義
-        api_url = f"https://generativelanguage.googleapis.com/v1/models/{model_name}:generateContent"
+        api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
 
         # ヘッダーに Content-Type と APIキーを含める
         headers = {
