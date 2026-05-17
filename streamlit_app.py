@@ -96,10 +96,12 @@ else:
             # アシスタントの応答をセッションステートに保存
             st.session_state.messages.append({"role": "assistant", "content": gemini_reply})
 
-        except requests.exceptions.RequestException as e:
-            error_message = f"APIリクエストエラーが発生しました: {e}"
-            st.error(error_message)
-            st.session_state.messages.append({"role": "assistant", "content": error_message})
+    except requests.exceptions.RequestException as e:
+        st.error(f"APIリクエストエラー: {e}")
+        if 'response' in locals():
+            st.write("ステータスコード:", response.status_code)
+            st.write("レスポンス:")
+            st.json(response.json())
         except Exception as e:
             error_message = f"予期せぬエラーが発生しました: {e}"
             st.error(error_message)
